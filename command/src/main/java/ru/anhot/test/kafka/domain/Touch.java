@@ -14,6 +14,11 @@ public class Touch {
         this.data = data;
     }
 
+    public Touch(String data, UUID uuid) {
+        this.uuid = uuid;
+        this.data = data;
+    }
+
     @TargetAggregateIdentifier
     public UUID getUuid() {
         return uuid;

@@ -1,6 +1,8 @@
 package ru.anhot.test.kafka.service;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.axonframework.eventhandling.EventHandler;
+import org.axonframework.eventhandling.EventMessage;
 import org.springframework.stereotype.Service;
 import ru.anhot.test.kafka.domain.Touch;
 
