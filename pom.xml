@@ -23,6 +23,7 @@
     <modules>
         <module>./command</module>
         <module>./query</module>
+        <module>./api</module>
     </modules>
 
 </project>
