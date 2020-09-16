@@ -1,13 +1,12 @@
 package ru.anhot.test.kafka.rest;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.anhot.test.kafka.domain.Touch;
 import ru.anhot.test.kafka.service.CommandService;
 
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -19,15 +18,20 @@ public class TouchController {
         this.service = service;
     }
 
-    @GetMapping("/")
-    public ResponseEntity<String> touch() {
-        return touchWithUuid(UUID.randomUUID());
-    }
-
-    @GetMapping("/{uuid}")
-    public ResponseEntity<String> touchWithUuid(@PathVariable UUID uuid) {
-        Touch command = new Touch(new Date().toString(), uuid);
+    @PutMapping ("/create_or_update")
+    public ResponseEntity<String> touch(@RequestBody(required = false) String uuid) {
+        Touch command;
+        if (null == uuid) {
+            command = new Touch(new Date().toString(), UUID.randomUUID());
+        } else {
+            try {
+                command = new Touch(new Date().toString(), UUID.fromString(uuid));
+            } catch (IllegalArgumentException e) {
+                return ResponseEntity.badRequest().body(e.getMessage());
+            }
+        }
         service.handle(command);
-        return ResponseEntity.ok("Command was sent. UUID: " + command.getUuid());
+        return ResponseEntity.ok("Command was sent. UUID: " +
+                command.getUuid() + ", data: " + command.getData());
     }
 }

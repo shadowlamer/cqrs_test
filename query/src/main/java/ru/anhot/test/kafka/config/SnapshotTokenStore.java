@@ -29,11 +29,7 @@ public class SnapshotTokenStore extends JpaTokenStore {
 
         TrackingToken token = super.fetchToken(processorName,segment);
         try {
-            long index = entityManager
-                    .createQuery("select globalIndex from DomainEventEntry where function('to_timestamp', timeStamp, 'YYYY-MM-DD\\THH24:MI:SS.US') < ?1 order by globalIndex desc" , Long.class)
-                    .setParameter(1, Date.from(Instant.now().minusSeconds(expireSeconds)))
-                    .setMaxResults(1)
-                    .getSingleResult();
+            long index = 0;
             return new GapAwareTrackingToken(index , new ArrayList<Long>());
         } catch (ClassCastException e) {
             return token;

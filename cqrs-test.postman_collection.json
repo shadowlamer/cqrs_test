@@ -1,0 +1,101 @@
+{
+	"info": {
+		"_postman_id": "092c8221-af5b-462a-b8f4-fb51d517448a",
+		"name": "cqrs-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/create_or_update",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"create_or_update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "5de0a4c5-950c-488c-851a-cb8f1ed02f2b",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/create_or_update",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"create_or_update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTouches",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8082/touches",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"touches"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTouch",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8082/touch/5de0a4c5-950c-488c-851a-cb8f1ed02f2b",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"touch",
+						"5de0a4c5-950c-488c-851a-cb8f1ed02f2b"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
