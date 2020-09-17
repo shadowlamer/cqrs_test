@@ -20,13 +20,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8081/create_or_update",
+					"raw": "localhost:8080/create",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8080",
 					"path": [
-						"create_or_update"
+						"create"
 					]
 				}
 			},
@@ -39,7 +39,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "5de0a4c5-950c-488c-851a-cb8f1ed02f2b",
+					"raw": "{\n        \"uuid\": \"5de0a4c5-950c-488c-851a-cb8f1ed02f2b\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -47,13 +47,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8081/create_or_update",
+					"raw": "localhost:8080/update",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8080",
 					"path": [
-						"create_or_update"
+						"update"
 					]
 				}
 			},
@@ -65,11 +65,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8082/touches",
+					"raw": "localhost:8080/touches",
 					"host": [
 						"localhost"
 					],
-					"port": "8082",
+					"port": "8080",
 					"path": [
 						"touches"
 					]
@@ -83,11 +83,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8082/touch/5de0a4c5-950c-488c-851a-cb8f1ed02f2b",
+					"raw": "localhost:8080/touch/5de0a4c5-950c-488c-851a-cb8f1ed02f2b",
 					"host": [
 						"localhost"
 					],
-					"port": "8082",
+					"port": "8080",
 					"path": [
 						"touch",
 						"5de0a4c5-950c-488c-851a-cb8f1ed02f2b"
