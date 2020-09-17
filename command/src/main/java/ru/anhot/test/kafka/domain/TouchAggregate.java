@@ -1,5 +1,6 @@
 package ru.anhot.test.kafka.domain;
 
+import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
@@ -12,6 +13,7 @@ import java.util.UUID;
 import static org.axonframework.modelling.command.AggregateCreationPolicy.CREATE_IF_MISSING;
 import static org.axonframework.modelling.command.AggregateLifecycle.apply;
 
+@Slf4j
 @Aggregate(snapshotTriggerDefinition = "eachThirdSnapshotTrigger")
 public class TouchAggregate implements Serializable {
 
@@ -20,7 +22,7 @@ public class TouchAggregate implements Serializable {
     private String data;
 
     public TouchAggregate() {
-        System.out.println("TouchAggregate created");
+        log.info("TouchAggregate created");
     }
 
     public TouchAggregate(Touch command) {
@@ -30,7 +32,7 @@ public class TouchAggregate implements Serializable {
     @CommandHandler
     @CreationPolicy(CREATE_IF_MISSING)
     public void handle(Touch command) {
-        System.out.println("Command handled: " + command.toString());
+        log.info("Command handled: " + command.toString());
         this.uuid = command.getUuid();
         this.data = command.getData();
         Touched event = new Touched(command);
@@ -41,8 +43,8 @@ public class TouchAggregate implements Serializable {
     void handler(Touched event) {
         this.uuid = event.getUuid();
         this.data = event.getData();
-        System.out.println("Touch event handled " + event.toString());
-        System.out.println("Aggregate data is: " + this.data + "now");
+        log.info("Touch event handled " + event.toString());
+        log.info("Aggregate data is: " + this.data + "now");
     }
 
 }

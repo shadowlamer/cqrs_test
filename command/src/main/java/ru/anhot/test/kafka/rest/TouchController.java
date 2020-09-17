@@ -19,19 +19,15 @@ public class TouchController {
     }
 
     @PutMapping ("/create_or_update")
-    public ResponseEntity<String> touch(@RequestBody(required = false) String uuid) {
+    public ResponseEntity<Touch> touch(@RequestBody(required = false) Touch touch) {
         Touch command;
-        if (null == uuid) {
+        if (null == touch) {
             command = new Touch(new Date().toString(), UUID.randomUUID());
         } else {
-            try {
-                command = new Touch(new Date().toString(), UUID.fromString(uuid));
-            } catch (IllegalArgumentException e) {
-                return ResponseEntity.badRequest().body(e.getMessage());
-            }
+            command = new Touch(new Date().toString(), touch.getUuid());
         }
         service.handle(command);
-        return ResponseEntity.ok("Command was sent. UUID: " +
-                command.getUuid() + ", data: " + command.getData());
+        return ResponseEntity.accepted().body(command);
     }
 }
+

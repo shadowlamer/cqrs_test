@@ -4,10 +4,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import ru.anhot.test.kafka.handler.TouchProjection;
+import ru.anhot.test.kafka.domain.TouchProjection;
+import ru.anhot.test.kafka.domain.TouchSummary;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 public class TouchController {
@@ -19,13 +22,15 @@ public class TouchController {
     }
 
     @GetMapping("/touches")
-    public ResponseEntity<Map<UUID, String>> getTouches() {
-        return ResponseEntity.ok(projection.getAllData());
+    public ResponseEntity<List<TouchSummary>> getTouches() {
+        return ResponseEntity.ok(
+                projection.getAllSummaries().entrySet().stream()
+                        .map(Map.Entry::getValue).collect(Collectors.toList())
+        );
     }
 
     @GetMapping("/touch/{uuid}")
-    public ResponseEntity<String> getTouchByUuid(@PathVariable UUID uuid) {
-        return ResponseEntity.ok(projection.getDataByUuid(uuid));
+    public ResponseEntity<TouchSummary> getTouchByUuid(@PathVariable UUID uuid) {
+        return ResponseEntity.ok(projection.getSummaryByUuid(uuid));
     }
-
 }
