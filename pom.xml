@@ -26,4 +26,19 @@
         <module>./api</module>
     </modules>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.13</version>
+                <configuration>
+                    <skipBuild>true</skipBuild>
+                    <skipPush>true</skipPush>
+                    <skipTag>true</skipTag>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

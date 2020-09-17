@@ -58,6 +58,46 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>docker-resources</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.basedir}/docker</directory>
+									<filtering>false</filtering>
+									<excludes>
+										<exclude>**/*.yml</exclude>
+									</excludes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<configuration>
+					<repository>${project.artifactId}</repository>
+					<tag>${project.version}</tag>
+					<contextDirectory>${project.build.directory}</contextDirectory>
+					<skipBuild>false</skipBuild>
+					<skipPush>false</skipPush>
+					<skipTag>false</skipTag>
+					<buildArgs>
+						<appJar>${project.artifactId}-${project.version}.jar</appJar>
+					</buildArgs>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
